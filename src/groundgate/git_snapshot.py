@@ -37,7 +37,28 @@ def _git_isolated_write_tree(root: Path) -> str:
     try:
         # Stage all non-ignored working-tree files into the temporary index only.
         subprocess.run(
-            ["git", "add", "-A", "--", ".", ":!.groundgate"],
+            ["git", "add", "-A"],
+            cwd=root,
+            env=env,
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        # Exclude internal gate directories from the temporary index regardless of .gitignore.
+        subprocess.run(
+            [
+                "git",
+                "rm",
+                "-r",
+                "--cached",
+                "--ignore-unmatch",
+                "-q",
+                ".groundgate",
+                ".gatekit",
+                ".replaygate",
+                ".scopegate",
+            ],
             cwd=root,
             env=env,
             check=True,
