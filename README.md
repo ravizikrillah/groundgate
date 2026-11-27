@@ -48,6 +48,14 @@ AI coding and research agents frequently hallucinate in their **final Markdown r
 
 Requires Python 3.11+ and `uv`.
 
+### Zero-Install with `uvx` (Recommended)
+
+Run `groundgate` directly from GitHub without cloning or installing globally:
+
+```bash
+uvx --from git+https://github.com/ravizikrillah/groundgate.git groundgate --help
+```
+
 ### Local Clone (Development & Tests)
 
 ```bash
@@ -107,7 +115,13 @@ if not result.passed:
 
 This repository includes an agent skill at [`skills/groundgate/SKILL.md`](skills/groundgate/SKILL.md) that teaches AI agents how to record test runs and URL observations and run `groundgate verify` before emitting a final response.
 
-Install the skill from a local clone:
+Install via `skills.sh` CLI:
+
+```bash
+npx skills add ravizikrillah/groundgate
+```
+
+Or install the skill from a local clone:
 
 ```bash
 chmod +x install-skill.sh
